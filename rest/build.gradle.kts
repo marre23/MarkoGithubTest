@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.kapt)
 }
 
 android {
@@ -40,4 +41,14 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //retrofit and gson
+    implementation(libs.gson)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    //dagger
+    implementation(libs.dagger.android)
+    implementation(libs.dagger.android.support)
+    kapt(libs.dagger.compiler)
 }

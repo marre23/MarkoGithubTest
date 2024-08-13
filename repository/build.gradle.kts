@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.kapt)
 }
 
 android {
@@ -34,10 +35,18 @@ android {
 
 dependencies {
 
+    implementation(project(":domain"))
+    api(project(":rest"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //dagger
+    implementation(libs.dagger.android)
+    implementation(libs.dagger.android.support)
+    kapt(libs.dagger.compiler)
 }

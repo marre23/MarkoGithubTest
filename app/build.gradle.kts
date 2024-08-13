@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.kapt)
 }
 
 android {
@@ -33,11 +34,15 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures{
+        viewBinding = true
+    }
 }
 
 dependencies {
 
     implementation(project(":domain"))
+    implementation(project(":repository"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -47,4 +52,16 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //dagger
+    implementation(libs.dagger.android)
+    implementation(libs.dagger.android.support)
+    kapt(libs.dagger.compiler)
+
+    //coroutines
+    implementation(libs.kotlinx.coroutines.android)
+
+    //navigation
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
 }
