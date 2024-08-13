@@ -1,6 +1,6 @@
 package com.marko.rest.models
 
-data class LicenseDTO(
+data class LicenseItemDTO(
     val key: String,
     val name: String,
     val node_id: String,
