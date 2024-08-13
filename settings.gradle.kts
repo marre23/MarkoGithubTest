@@ -21,4 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "MarkoGithubTest"
 include(":app")
- 
+include(":domain")
+include(":repository")
+include(":rest")
