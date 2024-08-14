@@ -14,15 +14,19 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(private val repo: UserData) : ViewModel() {
 
     val reposData = MutableLiveData<List<UserRepoItem>>()
+    val reposDataLoading = MutableLiveData<Boolean>()
+    val reposDataError = MutableLiveData<Boolean>()
 
     fun getData() {
         viewModelScope.launch {
             getRestData().collect { responseResult ->
                 when (responseResult) {
                     is ResponseResult.OnLoading -> {
+                        reposDataLoading.postValue(true)
                     }
 
                     is ResponseResult.OnError -> {
+                        reposDataError.postValue(true)
                     }
 
                     is ResponseResult.OnSuccess -> {

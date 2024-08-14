@@ -7,9 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.marko.domain.common.ResponseResult
 import com.marko.githubapitestappmp.GHTApp
 import com.marko.githubapitestappmp.databinding.FragmentHomeBinding
+import com.marko.githubapitestappmp.ui.home.adapters.UserListener
+import com.marko.githubapitestappmp.ui.home.adapters.UsersAdapter
+import com.marko.githubapitestappmp.utils.Status
+import com.marko.githubapitestappmp.utils.hide
+import com.marko.githubapitestappmp.utils.show
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
@@ -25,6 +32,8 @@ class HomeFragment : Fragment() {
     @Inject
     lateinit var homeViewModel: HomeViewModel
 
+    lateinit var usersRepoAdapter: UsersAdapter
+
     override fun onAttach(context: Context) {
         (requireActivity().application as GHTApp).appComponent.inject(this)
         super.onAttach(context)
@@ -37,17 +46,54 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
 
+        usersRepoAdapter = UsersAdapter(object : UserListener {
+            override fun onUserClick(name: String) {
+                homeViewModel.getData()
+            }
+        })
+
+        with(binding) {
+            recyclerViewUserRepos.apply {
+                layoutManager = LinearLayoutManager(requireContext())
+                adapter = usersRepoAdapter
+            }
+        }
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        homeViewModel.getData()
+        homeViewModel.apply {
+            getData()
 
-        homeViewModel.reposData.observe(viewLifecycleOwner){
-            it?.let{
-                Log.d("marre","Uspesno povukao: ${it.size}")
+            reposDataLoading.observe(viewLifecycleOwner) {
+                setVisibleItem(Status.LOADING)
+            }
+
+            reposDataError.observe(viewLifecycleOwner) {
+                setVisibleItem(Status.ERROR)
+            }
+
+            reposData.observe(viewLifecycleOwner) {
+                it?.let {
+                    usersRepoAdapter.setData(it)
+                    setVisibleItem(Status.SHOW_DATA)
+                }
+            }
+        }
+    }
+
+    private fun setVisibleItem(status: Status) {
+        with(binding) {
+            progressBarLoading.hide()
+            recyclerViewUserRepos.hide()
+            imageViewError.hide()
+            when (status) {
+                Status.LOADING -> progressBarLoading.show()
+                Status.SHOW_DATA -> recyclerViewUserRepos.show()
+                Status.ERROR -> imageViewError.show()
             }
         }
     }

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class OwnerDTO(
     @SerializedName("avatar_url")
     val avatar_url: String,
-    @SerializedName("event_url")
+    @SerializedName("events_url")
     val events_url: String,
     @SerializedName("followers_url")
     val followers_url: String,
