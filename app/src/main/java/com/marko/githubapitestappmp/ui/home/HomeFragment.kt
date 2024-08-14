@@ -1,6 +1,7 @@
 package com.marko.githubapitestappmp.ui.home
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.marko.domain.common.ResponseResult
 import com.marko.githubapitestappmp.GHTApp
@@ -48,7 +50,8 @@ class HomeFragment : Fragment() {
 
         usersRepoAdapter = UsersAdapter(object : UserListener {
             override fun onUserClick(name: String) {
-                homeViewModel.getData()
+                val action = HomeFragmentDirections.actionHomeFragmentToRepoDetailsFragment(name)
+                findNavController().navigate(action)
             }
         })
 
@@ -78,8 +81,12 @@ class HomeFragment : Fragment() {
 
             reposData.observe(viewLifecycleOwner) {
                 it?.let {
-                    usersRepoAdapter.setData(it)
-                    setVisibleItem(Status.SHOW_DATA)
+                    if(it.isNotEmpty()){
+                        usersRepoAdapter.setData(it)
+                        setVisibleItem(Status.SHOW_DATA)
+                    }else{
+                        setVisibleItem(Status.ERROR)
+                    }
                 }
             }
         }
@@ -93,7 +100,10 @@ class HomeFragment : Fragment() {
             when (status) {
                 Status.LOADING -> progressBarLoading.show()
                 Status.SHOW_DATA -> recyclerViewUserRepos.show()
-                Status.ERROR -> imageViewError.show()
+                Status.ERROR -> {
+                    root.setBackgroundColor(Color.RED)
+                    imageViewError.show()
+                }
             }
         }
     }

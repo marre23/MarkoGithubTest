@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.kapt)
+    alias(libs.plugins.safe.args)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -36,6 +38,10 @@ android {
     }
     buildFeatures{
         viewBinding = true
+        compose = true
+    }
+    composeOptions{
+        kotlinCompilerExtensionVersion = (libs.versions.kotlin.toString())
     }
 }
 
@@ -64,4 +70,15 @@ dependencies {
     //navigation
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+
+    //coil compose
+    implementation(libs.coil.compose)
+
+    //compose
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
 }

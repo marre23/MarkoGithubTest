@@ -98,7 +98,7 @@ data class RepoItemDTO(
     @SerializedName("languages_url")
     val languages_url: String,
     @SerializedName("license")
-    val license: LicenseItemDTO,
+    val license: LicenseItemDTO?,
     @SerializedName("merges_url")
     val merges_url: String,
     @SerializedName("milestones_url")

@@ -1,5 +1,6 @@
 package com.marko.rest.implementation
 
+import android.util.Log
 import com.marko.domain.models.RepoItem
 import com.marko.domain.models.RepoTagsItem
 import com.marko.domain.models.UserRepoItem

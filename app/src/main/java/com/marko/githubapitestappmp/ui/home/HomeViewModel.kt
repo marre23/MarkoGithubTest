@@ -1,5 +1,6 @@
 package com.marko.githubapitestappmp.ui.home
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -26,6 +27,7 @@ class HomeViewModel @Inject constructor(private val repo: UserData) : ViewModel(
                     }
 
                     is ResponseResult.OnError -> {
+
                         reposDataError.postValue(true)
                     }
 

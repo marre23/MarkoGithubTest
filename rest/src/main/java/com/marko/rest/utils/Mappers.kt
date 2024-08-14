@@ -13,7 +13,13 @@ import com.marko.rest.models.RepoItemDTO
 import com.marko.rest.models.RepoTagsItemDTO
 import com.marko.rest.models.UserReposItemDTO
 
-internal fun LicenseItemDTO.toModel(): LicenseItem = LicenseItem(key, name, node_id, spdx_id, url)
+internal fun LicenseItemDTO.toModel(): LicenseItem = LicenseItem(
+    key,
+    name,
+    node_id,
+    spdx_id,
+    url
+)
 
 internal fun OwnerDTO.toModel(): OwnerItem = OwnerItem(
     avatar_url,
@@ -166,7 +172,7 @@ internal fun RepoItemDTO.toModel(): RepoItem = RepoItem(
     labels_url,
     language,
     languages_url,
-    license.toModel(),
+    license?.toModel(),
     merges_url,
     milestones_url,
     mirror_url,

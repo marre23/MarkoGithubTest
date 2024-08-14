@@ -8,6 +8,20 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.marko.githubapitestappmp.ui.home.HomeFragment"
-        tools:layout="@layout/fragment_home"
-        android:label="HomeFragment" />
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_repoDetailsFragment"
+            app:destination="@id/repoDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/repoDetailsFragment"
+        android:name="com.marko.githubapitestappmp.ui.repoDetails.RepoDetailsFragment"
+        android:label="RepoDetailsFragment"
+        tools:layout="@layout/fragment_repo_details" >
+        <argument
+            android:name="repoName"
+            app:argType="string" />
+    </fragment>
 </navigation>

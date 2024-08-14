@@ -3,6 +3,7 @@ package com.marko.githubapitestappmp.di
 import android.content.Context
 import com.marko.domain.di.AppScope
 import com.marko.githubapitestappmp.ui.home.HomeFragment
+import com.marko.githubapitestappmp.ui.repoDetails.RepoDetailsFragment
 import com.marko.repository.di.RepoRepositoryModule
 import com.marko.repository.di.UserRepositoryModule
 import com.marko.rest.di.RepoDataModule
@@ -20,4 +21,5 @@ interface AppComponent {
     }
 
     fun inject(fragment: HomeFragment)
+    fun inject(fragment: RepoDetailsFragment)
 }
