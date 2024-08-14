@@ -3,7 +3,7 @@ package com.marko.domain.models
 data class LicenseItem(
     val key: String,
     val name: String,
-    val node_id: String,
-    val spdx_id: String,
+    val nodeId: String,
+    val spdxId: String,
     val url: String
 )
