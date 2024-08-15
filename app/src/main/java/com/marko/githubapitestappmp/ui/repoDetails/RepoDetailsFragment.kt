@@ -7,13 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.marko.githubapitestappmp.GHTApp
 import com.marko.githubapitestappmp.databinding.FragmentRepoDetailsBinding
 import com.marko.githubapitestappmp.ui.repoDetails.compose.ShowComposeView
 import com.marko.githubapitestappmp.ui.repoDetails.compose.ShowTagList
+import com.marko.githubapitestappmp.utils.hide
 import javax.inject.Inject
 
 class RepoDetailsFragment : Fragment() {
@@ -49,30 +56,37 @@ class RepoDetailsFragment : Fragment() {
 
             fetchData()
 
-            repoItem.observe(viewLifecycleOwner) {
-                setData()
-            }
-            repoTags.observe(viewLifecycleOwner){
+            hideProgress.observe(viewLifecycleOwner) {
                 setData()
             }
         }
     }
 
     private fun setData() {
-        binding.composeViewRepo.setContent {
-            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                repoDetailsViewModel.apply {
-                    repoItem.value?.let { repoItem ->
-                        ShowComposeView(data = repoItem)
-                    }
-                    repoTags.value?.let { list->
-                        if(list.isNotEmpty()){
-                            ShowTagList(list)
+        binding.apply {
+            progressBarLoadingData.hide()
+            composeViewRepo.setContent {
+                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    repoDetailsViewModel.apply {
+                        repoItem.value?.let { repoItem ->
+                            ShowComposeView(data = repoItem)
+                        }
+                        repoTags.value?.let { list ->
+                            if (list.isNotEmpty()) {
+                                ShowTagList(list)
+                            }else{
+                                Text(
+                                    modifier = Modifier.align(Alignment.CenterHorizontally),
+                                    text = "There was no tags!",
+                                    textAlign = TextAlign.Center,
+                                    fontSize = 20.sp,
+                                    color = Color.White
+                                )
+                            }
                         }
                     }
                 }
             }
-
         }
     }
 }

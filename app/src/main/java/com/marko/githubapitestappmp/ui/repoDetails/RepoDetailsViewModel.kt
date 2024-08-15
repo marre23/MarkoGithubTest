@@ -16,10 +16,12 @@ import javax.inject.Inject
 class RepoDetailsViewModel @Inject constructor(private val repoData: RepoData) : ViewModel() {
 
     var repoName: String = ""
-
     val repoItem = MutableLiveData<RepoItem>()
-
     val repoTags = MutableLiveData<List<RepoTagsItem>>()
+    val hideProgress = MutableLiveData<Boolean>()
+
+    private var repoItemLoaded = false
+    private var repoTagsLoaded = false
 
     fun fetchData() {
         viewModelScope.launch {
@@ -32,14 +34,19 @@ class RepoDetailsViewModel @Inject constructor(private val repoData: RepoData) :
         fetchRestRepoDataByName().collect { responseResult ->
             when (responseResult) {
                 is ResponseResult.OnLoading -> {
+                    repoItemLoaded = false
                    Log.i("RepoDetails","Fetching repo data...")
                 }
 
                 is ResponseResult.OnError -> {
+                    repoItemLoaded = true
+                    isLoaded()
                 }
 
                 is ResponseResult.OnSuccess -> {
+                    repoItemLoaded = true
                     repoItem.postValue(responseResult.data)
+                    isLoaded()
                 }
             }
         }
@@ -53,10 +60,14 @@ class RepoDetailsViewModel @Inject constructor(private val repoData: RepoData) :
                 }
 
                 is ResponseResult.OnError -> {
+                    repoTagsLoaded = true
+                    isLoaded()
                 }
 
                 is ResponseResult.OnSuccess -> {
+                    repoTagsLoaded = true
                     repoTags.postValue(responseResult.data)
+                    isLoaded()
                 }
             }
         }
@@ -85,6 +96,12 @@ class RepoDetailsViewModel @Inject constructor(private val repoData: RepoData) :
         }.onFailure { exception ->
             Log.e("RepoDetails", "error while fetching tags: ${exception.message}")
             emit(ResponseResult.OnError(exception))
+        }
+    }
+
+    private fun isLoaded(){
+        if(repoTagsLoaded && repoItemLoaded){
+            hideProgress.postValue(true)
         }
     }
 }
