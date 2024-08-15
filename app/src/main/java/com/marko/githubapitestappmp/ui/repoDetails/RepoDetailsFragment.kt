@@ -11,12 +11,14 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.marko.githubapitestappmp.GHTApp
+import com.marko.githubapitestappmp.R
 import com.marko.githubapitestappmp.databinding.FragmentRepoDetailsBinding
 import com.marko.githubapitestappmp.ui.repoDetails.compose.ShowComposeView
 import com.marko.githubapitestappmp.ui.repoDetails.compose.ShowTagList
@@ -77,7 +79,7 @@ class RepoDetailsFragment : Fragment() {
                             }else{
                                 Text(
                                     modifier = Modifier.align(Alignment.CenterHorizontally),
-                                    text = "There was no tags!",
+                                    text = stringResource(R.string.no_drafts),
                                     textAlign = TextAlign.Center,
                                     fontSize = 20.sp,
                                     color = Color.White

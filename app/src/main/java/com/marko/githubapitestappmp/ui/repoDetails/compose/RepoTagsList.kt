@@ -1,5 +1,6 @@
 package com.marko.githubapitestappmp.ui.repoDetails.compose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,8 +31,7 @@ fun ShowTagItem(tagItem: RepoTagsItem) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(all = 12.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+            .padding(all = 12.dp).background(Color.DarkGray)
     ) {
         ShowTagName(tagItem.name)
         ShowTagSha(tagItem.commit.sha)
@@ -44,7 +44,8 @@ fun ShowTagName(name: String) {
         text = name,
         textAlign = TextAlign.Center,
         fontSize = 14.sp,
-        color = Color.White
+        color = Color.White,
+        modifier = Modifier.padding(all= 12.dp)
     )
 }
 
@@ -54,6 +55,7 @@ fun ShowTagSha(sha: String) {
         text = sha,
         textAlign = TextAlign.Center,
         fontSize = 14.sp,
-        color = Color.White
+        color = Color.White,
+        modifier = Modifier.padding(all= 12.dp)
     )
 }
