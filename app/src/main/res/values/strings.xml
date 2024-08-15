@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Github Test App</string>
+
+    <string name="no_drafts">No drafts, empty list!</string>
 </resources>
