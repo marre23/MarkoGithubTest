@@ -29,7 +29,7 @@ fun ShowComposeView(data: RepoItem) {
                 .align(Alignment.CenterHorizontally)
         )
         Text(
-            modifier = Modifier .align(Alignment.CenterHorizontally),
+            modifier = Modifier.align(Alignment.CenterHorizontally),
             text = data.name,
             textAlign = TextAlign.Center,
             fontSize = 20.sp,
