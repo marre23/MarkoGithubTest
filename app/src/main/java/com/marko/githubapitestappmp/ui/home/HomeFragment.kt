@@ -3,15 +3,12 @@ package com.marko.githubapitestappmp.ui.home
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.marko.domain.common.ResponseResult
 import com.marko.githubapitestappmp.GHTApp
 import com.marko.githubapitestappmp.databinding.FragmentHomeBinding
 import com.marko.githubapitestappmp.ui.home.adapters.UserListener
@@ -19,12 +16,7 @@ import com.marko.githubapitestappmp.ui.home.adapters.UsersAdapter
 import com.marko.githubapitestappmp.utils.Status
 import com.marko.githubapitestappmp.utils.hide
 import com.marko.githubapitestappmp.utils.show
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.coroutines.coroutineContext
 
 class HomeFragment : Fragment() {
 
@@ -81,10 +73,10 @@ class HomeFragment : Fragment() {
 
             reposData.observe(viewLifecycleOwner) {
                 it?.let {
-                    if(it.isNotEmpty()){
+                    if (it.isNotEmpty()) {
                         usersRepoAdapter.setData(it)
                         setVisibleItem(Status.SHOW_DATA)
-                    }else{
+                    } else {
                         setVisibleItem(Status.ERROR)
                     }
                 }

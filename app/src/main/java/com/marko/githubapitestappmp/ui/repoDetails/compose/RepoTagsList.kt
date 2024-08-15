@@ -1,9 +1,7 @@
 package com.marko.githubapitestappmp.ui.repoDetails.compose
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -18,9 +16,9 @@ import androidx.compose.ui.unit.sp
 import com.marko.domain.models.RepoTagsItem
 
 @Composable
-fun ShowTagList(list: List<RepoTagsItem>){
+fun ShowTagList(list: List<RepoTagsItem>) {
     LazyColumn {
-        items(list) { item->
+        items(list) { item ->
             ShowTagItem(tagItem = item)
         }
     }
@@ -31,7 +29,8 @@ fun ShowTagItem(tagItem: RepoTagsItem) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(all = 12.dp).background(Color.DarkGray)
+            .padding(all = 12.dp)
+            .background(Color.DarkGray)
     ) {
         ShowTagName(tagItem.name)
         ShowTagSha(tagItem.commit.sha)
@@ -45,7 +44,7 @@ fun ShowTagName(name: String) {
         textAlign = TextAlign.Center,
         fontSize = 14.sp,
         color = Color.White,
-        modifier = Modifier.padding(all= 12.dp)
+        modifier = Modifier.padding(all = 12.dp)
     )
 }
 
@@ -56,6 +55,6 @@ fun ShowTagSha(sha: String) {
         textAlign = TextAlign.Center,
         fontSize = 14.sp,
         color = Color.White,
-        modifier = Modifier.padding(all= 12.dp)
+        modifier = Modifier.padding(all = 12.dp)
     )
 }

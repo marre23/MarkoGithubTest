@@ -1,13 +1,11 @@
 package com.marko.rest.implementation
 
-import android.util.Log
 import com.marko.domain.models.RepoItem
 import com.marko.domain.models.RepoTagsItem
-import com.marko.domain.models.UserRepoItem
 import com.marko.rest.RetrofitBuilder
 import com.marko.rest.api.RepoApi
 import com.marko.rest.data.RepoData
-import com.marko.rest.utils.toModel
+import com.marko.rest.models.toModel
 import javax.inject.Inject
 
 class RepoDataImpl @Inject constructor() : RepoData {

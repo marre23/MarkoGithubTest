@@ -35,7 +35,7 @@ class RepoDetailsViewModel @Inject constructor(private val repoData: RepoData) :
             when (responseResult) {
                 is ResponseResult.OnLoading -> {
                     repoItemLoaded = false
-                   Log.i("RepoDetails","Fetching repo data...")
+                    Log.i("RepoDetails", "Fetching repo data...")
                 }
 
                 is ResponseResult.OnError -> {
@@ -56,7 +56,7 @@ class RepoDetailsViewModel @Inject constructor(private val repoData: RepoData) :
         fetchRestRepoTagsByName().collect { responseResult ->
             when (responseResult) {
                 is ResponseResult.OnLoading -> {
-                    Log.i("RepoDetails","Fetching tags data...")
+                    Log.i("RepoDetails", "Fetching tags data...")
                 }
 
                 is ResponseResult.OnError -> {
@@ -99,8 +99,8 @@ class RepoDetailsViewModel @Inject constructor(private val repoData: RepoData) :
         }
     }
 
-    private fun isLoaded(){
-        if(repoTagsLoaded && repoItemLoaded){
+    private fun isLoaded() {
+        if (repoTagsLoaded && repoItemLoaded) {
             hideProgress.postValue(true)
         }
     }
