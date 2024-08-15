@@ -76,7 +76,7 @@ class RepoDetailsFragment : Fragment() {
                         repoTags.value?.let { list ->
                             if (list.isNotEmpty()) {
                                 ShowTagList(list)
-                            }else{
+                            } else {
                                 Text(
                                     modifier = Modifier.align(Alignment.CenterHorizontally),
                                     text = stringResource(R.string.no_drafts),

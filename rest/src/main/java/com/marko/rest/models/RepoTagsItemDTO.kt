@@ -1,6 +1,7 @@
 package com.marko.rest.models
 
 import com.google.gson.annotations.SerializedName
+import com.marko.domain.models.RepoTagsItem
 
 data class RepoTagsItemDTO(
     @SerializedName("commit")
@@ -14,3 +15,6 @@ data class RepoTagsItemDTO(
     @SerializedName("zipball_url")
     val zipball_url: String
 )
+
+internal fun RepoTagsItemDTO.toModel(): RepoTagsItem =
+    RepoTagsItem(commit.toModel(), name, node_id, tarball_url, zipball_url)

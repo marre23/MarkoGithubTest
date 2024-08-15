@@ -1,6 +1,7 @@
 package com.marko.rest.models
 
 import com.google.gson.annotations.SerializedName
+import com.marko.domain.models.OwnerItem
 
 data class OwnerDTO(
     @SerializedName("avatar_url")
@@ -39,4 +40,25 @@ data class OwnerDTO(
     val type: String,
     @SerializedName("url")
     val url: String
+)
+
+internal fun OwnerDTO.toModel(): OwnerItem = OwnerItem(
+    avatar_url,
+    events_url,
+    followers_url,
+    following_url,
+    gists_url,
+    gravatar_id,
+    html_url,
+    id,
+    login,
+    node_id,
+    organizations_url,
+    received_events_url,
+    repos_url,
+    site_admin,
+    starred_url,
+    subscriptions_url,
+    type,
+    url
 )

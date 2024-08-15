@@ -1,6 +1,7 @@
 package com.marko.rest.models
 
 import com.google.gson.annotations.SerializedName
+import com.marko.domain.models.LicenseItem
 
 data class LicenseItemDTO(
     @SerializedName("key")
@@ -13,4 +14,12 @@ data class LicenseItemDTO(
     val spdx_id: String,
     @SerializedName("url")
     val url: String
+)
+
+internal fun LicenseItemDTO.toModel(): LicenseItem = LicenseItem(
+    key,
+    name,
+    node_id,
+    spdx_id,
+    url
 )

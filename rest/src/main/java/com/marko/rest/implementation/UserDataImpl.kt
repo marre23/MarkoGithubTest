@@ -1,11 +1,10 @@
 package com.marko.rest.implementation
 
-import android.util.Log
 import com.marko.domain.models.UserRepoItem
 import com.marko.rest.RetrofitBuilder
 import com.marko.rest.api.UsersApi
 import com.marko.rest.data.UserData
-import com.marko.rest.utils.toModel
+import com.marko.rest.models.toModel
 import javax.inject.Inject
 
 class UserDataImpl @Inject constructor() : UserData {

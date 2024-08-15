@@ -1,6 +1,7 @@
 package com.marko.rest.models
 
 import com.google.gson.annotations.SerializedName
+import com.marko.domain.models.CommitItem
 
 data class CommitItemDTO(
     @SerializedName("sha")
@@ -8,3 +9,5 @@ data class CommitItemDTO(
     @SerializedName("url")
     val url: String
 )
+
+internal fun CommitItemDTO.toModel(): CommitItem = CommitItem(sha, url)
